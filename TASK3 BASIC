@@ -1,0 +1,22 @@
+#This my next task of basic level
+#internship task from Codveda
+#Word counter- to count the words in file
+
+#Defining to count words in file
+def count_words_in_file(file_path):
+    try:
+        # Open the file in read mode so no changes can be done to original file
+        # don't use symboles or ("") You can copy the path of file if in different directory
+        with open(file_path, 'r') as file:
+            content = file.read()
+            # Split content by whitespace and count words to get exact counting
+            word_count = len(content.split())
+        print(f"The file contains {word_count} words.")
+    except FileNotFoundError:
+        print(f"Error: The file '{file_path}' was not found.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+# Input: file path
+file_path = input("Enter the path to the text file: ")
+count_words_in_file(file_path)

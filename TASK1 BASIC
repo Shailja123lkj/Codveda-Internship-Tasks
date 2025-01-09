@@ -1,0 +1,56 @@
+#This my first task of basic level
+#internship task from Codveda
+#Simple Calculator
+
+#defining operations needed in a calculator
+#Addition
+def add(a, b):
+    return a + b
+
+#Subtraction
+def subtract(a, b):
+    return a - b
+
+#Multiplication
+def multiply(a, b):
+    return a * b
+
+#Division
+def divide(a, b):
+    if b == 0:
+        return "Error: Division by zero is not allowed."
+    return a / b
+
+# Calculator program to initialize operation
+def calculator():
+    print("Yay! This is a Simple Calculator!")
+    print("Choose an operation to solve your problem:")
+    print("1. Addition (+)")
+    print("2. Subtraction (-)")
+    print("3. Multiplication (*)")
+    print("4. Division (/)")
+
+    # Taking user input for type of operation user requires
+    choice = input("Enter the number corresponding to the operation (1/2/3/4): ")
+
+    #taking input values
+    if choice in ['1', '2', '3', '4']:
+
+        # Taking input for numbers
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+
+        # Performing the chosen operation
+        if choice == '1':
+            print(f"The result of addition is: {add(num1, num2)}")
+        elif choice == '2':
+            print(f"The result of subtraction is: {subtract(num1, num2)}")
+        elif choice == '3':
+            print(f"The result of multiplication is: {multiply(num1, num2)}")
+        elif choice == '4':
+            print(f"The result of division is: {divide(num1, num2)}")
+    else:
+        print("Invalid input.Try again")
+
+# Running the calculator to perform the desired opertion
+calculator()

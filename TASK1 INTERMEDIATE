@@ -1,0 +1,94 @@
+#This my first task of basic level
+#internship task from Codveda
+#To-Do List Application Description: Idea to work on tasks
+
+# this import built in module for JSON files
+import json
+
+# Defining Load tasks to open file from the JSON file
+def load_tasks():
+    try:
+        with open("tasks.json", "r") as file:
+            tasks = json.load(file)
+    except FileNotFoundError:
+        tasks = []
+    return tasks
+
+# Defining to save tasks to the JSON file
+def save_tasks(tasks):
+    with open("tasks.json", "w") as file:
+        json.dump(tasks, file, indent=4)
+
+# Defining to display all tasks
+def display_tasks(tasks):
+    if not tasks:
+        print("No tasks found.")
+    else:
+        for i, task in enumerate(tasks, start=1):
+            status = "Done" if task["done"] else "Pending"
+            print(f"{i}. {task['task']} - {status}")
+
+# Defining to add a new task
+def add_task(tasks):
+    task_description = input("Enter the task description: ")
+    tasks.append({"task": task_description, "done": False})
+    save_tasks(tasks)
+    print("Task added successfully.")
+
+# Defining to mark a task as done
+def mark_done(tasks):
+    display_tasks(tasks)
+    try:
+        task_id = int(input("Enter the task number to mark as done: "))
+        if 1 <= task_id <= len(tasks):
+            tasks[task_id - 1]["done"] = True
+            save_tasks(tasks)
+            print("Task marked as done.")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Invalid input.")
+
+# To Delete a task
+def delete_task(tasks):
+    display_tasks(tasks)
+    try:
+        task_id = int(input("Enter the task number to delete: "))
+        if 1 <= task_id <= len(tasks):
+            del tasks[task_id - 1]
+            save_tasks(tasks)
+            print("Task deleted successfully.")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Invalid input.")
+#Main usage
+def main():
+    tasks = load_tasks()
+    
+    while True:
+        print("\nTo-Do List:")
+        print("1. Add Task")
+        print("2. View Tasks")
+        print("3. Mark Task as Done")
+        print("4. Delete Task")
+        print("5. Exit")
+        
+        choice = input("Choose an option to perform in To Do List(1-5): ")
+
+        if choice == "1":
+            add_task(tasks)
+        elif choice == "2":
+            display_tasks(tasks)
+        elif choice == "3":
+            mark_done(tasks)
+        elif choice == "4":
+            delete_task(tasks)
+        elif choice == "5":
+            print("Exiting...")
+            break
+        else:
+            print("OOPS! Invalid choice, try again.")
+
+if __name__ == "__main__":
+    main()
